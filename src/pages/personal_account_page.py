@@ -1,0 +1,11 @@
+import allure
+from src.pages.base_page import BasePage
+
+
+
+
+class PersonalAccountPage(BasePage):
+
+    def __init__(self, driver):
+        super().__init__(driver)
+
