@@ -1,25 +1,36 @@
 import time
+
 import allure
 import pytest
+from src.data import URLS
 from src.pages.pass_recovery_page import PassRecoveryPage
-from src.locators.pass_recovery_page_locators import PassRecoveryPageLocators as PRPL
-from src.data import FakeData as FD
+
+from src.helpers import FakeData as FD
 
 
 class TestPassRecoveryPage():
 
     @pytest.mark.parametrize("driver", ["chrome"], indirect=True)
-    def test_pass_recovery_page(self, driver):
+    @allure.title('Проверка перехода на страницу восстановления пароля')
+    def test_navigate_to_recovery_page(self, driver):
         scooter_login_page = PassRecoveryPage(driver)
+        scooter_login_page.go_to_login_page_and_press_forgot_button()
+        assert scooter_login_page.current_url() == URLS.FORGOT_PASSWORD_URL
 
-        with allure.step(f'Тест-сценарий страницы восстановление пароля'):
-            scooter_login_page.open_url('login')
-            time.sleep(2)
-            scooter_login_page.click_element(PRPL.AUTH_FORGOT_PASS_BUTTON)
-            assert driver.current_url == 'https://stellarburgers.nomoreparties.site/forgot-password'
-            scooter_login_page.fill_the_field(PRPL.EMAIL_FIELD_Recovery_PAGE, FD.f_mail())
-            scooter_login_page.click_element(PRPL.RECOVERY_FORGOT_PASS_BUTTON)
-            time.sleep(2)
-            assert driver.current_url == 'https://stellarburgers.nomoreparties.site/reset-password'
-            scooter_login_page.click_element(PRPL.SHOW_HIDE_PASS_BUTTON)
-            assert 'text' in scooter_login_page.find_element(PRPL.PASS_FIELD).get_attribute('type')
+    @pytest.mark.parametrize("driver", ["chrome"], indirect=True)
+    @allure.title('Проверка ввода почты и восстановления пароля')
+    def test_email_input_and_recovery(self, driver):
+        scooter_login_page = PassRecoveryPage(driver)
+        scooter_login_page.go_to_login_page_and_press_forgot_button()
+        scooter_login_page.fill_the_field()
+        scooter_login_page.press_reset_and_wait_url_changes()
+        assert scooter_login_page.current_url() == URLS.RESET_PASSWORD_URL
+
+    @pytest.mark.parametrize("driver", ["chrome"], indirect=True)
+    @allure.title('Проверка функционала показать/скрыть пароль')
+    def test_show_hide_password(self, driver):
+        scooter_login_page = PassRecoveryPage(driver)
+        scooter_login_page.go_to_login_page_and_press_forgot_button()
+        scooter_login_page.fill_the_field()
+        scooter_login_page.press_reset_and_wait_url_changes()
+        assert 'text' in scooter_login_page.click_and_check_hide_pass_button()
