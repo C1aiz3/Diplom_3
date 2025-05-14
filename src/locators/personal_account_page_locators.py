@@ -7,4 +7,4 @@ class PersonalAccountPageLocators:
     ENTER_BUTTON = By.XPATH, '//form/button' #кнопка Войти
     PERSONAL_ACCOUNT_BUTTON = By.XPATH, '//nav/a' #кнопка Личный кабинет
     ORDER_HISTORY_BUTTON = By.XPATH, '//ul[@class="Account_list__3KQQf mb-20"]/li[2]/a' #кнопка История заказа в Личном кабинете
-    EXIT_BUTTON = By.XPATH, '//li/button' #копка ВЫход в Личном кабинете
+    EXIT_BUTTON = By.XPATH, '//li/button' #кнопка Выход в Личном кабинете
