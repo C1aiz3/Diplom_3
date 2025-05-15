@@ -15,10 +15,3 @@ class URLS():
 
 
 
-#@allure.step('Проверка отображения заказа в ленте заказов')
-    #def order_feed_displayed(self, number):
-        #order_locator = (By.XPATH, f'//p[contains(@class, "OrderFeed_number") and text()="{number}"]')
-        #return self.element_displayed(order_locator)
-
-
-
