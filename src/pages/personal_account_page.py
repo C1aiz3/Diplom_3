@@ -1,4 +1,5 @@
 import allure
+from src.data import EMAIL, PASSWORD
 from src.pages.base_page import BasePage
 from src.locators.personal_account_page_locators import PersonalAccountPageLocators as PAPL
 
@@ -23,3 +24,15 @@ class PersonalAccountPage(BasePage):
     @allure.step('Нажатие на кнопку выйти')
     def click_exit_button(self):
         self.click_element(PAPL.EXIT_BUTTON)
+
+    @allure.step('История заказов в профиле')
+    def go_to_order_history_in_profile(self):
+        self.click_element(PAPL.PERSONAL_ACCOUNT_BUTTON)
+        self.click_element(PAPL.ORDER_HISTORY_BUTTON)
+
+    @allure.step('Авторизация')
+    def auth(self):
+        self.open_url('login')
+        self.find_element(PAPL.EMAIL_FIELD).send_keys(EMAIL)
+        self.find_element(PAPL.PASSWORD_FIELD).send_keys(PASSWORD)
+        self.find_element(PAPL.ENTER_BUTTON).click()

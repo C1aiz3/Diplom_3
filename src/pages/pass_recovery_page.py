@@ -26,7 +26,7 @@ class PassRecoveryPage(BasePage):
         self.open_url('login')
         self.click_element(PRPL.AUTH_FORGOT_PASS_BUTTON)
 
-    @allure.step('Нажатие на восставноить пароль и проверка изменения URL')
+    @allure.step('Нажатие на восстановить пароль и проверка изменения URL')
     def press_reset_and_wait_url_changes(self):
         self.click_element(PRPL.RECOVERY_FORGOT_PASS_BUTTON)
         self.wait_until_url_changes()

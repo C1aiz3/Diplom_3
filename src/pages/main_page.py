@@ -1,10 +1,7 @@
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from src.pages.base_page import BasePage
 from selenium.webdriver import ActionChains
 from src.locators.main_page_locators import MainPageLocators as MPL
-from src.locators.orders_feed_locators import OrdersFeedLocators as OFL
 
 
 
@@ -15,7 +12,7 @@ class MainPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    @allure.step('ППеретаскивание элемента')
+    @allure.step('Перетаскивание элемента')
     def drag_and_release_bun(self):
         with allure.step(f'Drag from {MPL.FLUORESCENT_BUN} to {MPL.DRAG_AND_DROP_FIELD} and release'):
             start = self.find_element(MPL.FLUORESCENT_BUN)
